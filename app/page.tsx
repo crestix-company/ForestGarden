@@ -77,6 +77,8 @@ const restaurantJsonLd = {
   },
 };
 
+const assetPath = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}${path}`;
+
 export default function Home() {
   return (
     <main>
@@ -112,7 +114,7 @@ export default function Home() {
       <section className="hero" id="top">
         <img
           className="hero-image"
-          src="/images/web/DSC01028.webp"
+          src={assetPath('/images/web/DSC01028.webp')}
           alt="彩り豊かな野菜とお肉を盛り付けたForest Gardenのランチプレート"
         />
         <div className="hero-shade" />
@@ -154,10 +156,10 @@ export default function Home() {
         </div>
         <div className="concept-gallery">
           <figure className="concept-photo-main">
-            <img src="/images/web/DSC01386.webp" alt="明るい窓と緑を望むForest Gardenの店内" loading="lazy" />
+            <img src={assetPath('/images/web/DSC01386.webp')} alt="明るい窓と緑を望むForest Gardenの店内" loading="lazy" />
           </figure>
           <figure className="concept-photo-sub">
-            <img src="/images/web/DSC00988.webp" alt="壁に掲げられたForest Gardenの木製サイン" loading="lazy" />
+            <img src={assetPath('/images/web/DSC00988.webp')} alt="壁に掲げられたForest Gardenの木製サイン" loading="lazy" />
           </figure>
           <span className="botanical-note">Seasonal<br />&amp; gentle</span>
         </div>
@@ -177,7 +179,7 @@ export default function Home() {
 
         <div className="featured-menu-grid">
           <article className="featured-card featured-card-wide">
-            <img src="/images/web/DSC01067.webp" alt="薬膳キーマカレーとサラダのプレート" loading="lazy" />
+            <img src={assetPath('/images/web/DSC01067.webp')} alt="薬膳キーマカレーとサラダのプレート" loading="lazy" />
             <div>
               <span>Spice &amp; wellness</span>
               <h3>薬膳キーマカレー</h3>
@@ -186,7 +188,7 @@ export default function Home() {
             </div>
           </article>
           <article className="featured-card">
-            <img src="/images/web/DSC01055.webp" alt="トマトソース煮込みハンバーグのランチ" loading="lazy" />
+            <img src={assetPath('/images/web/DSC01055.webp')} alt="トマトソース煮込みハンバーグのランチ" loading="lazy" />
             <div>
               <span>Slow cooked</span>
               <h3>煮込みハンバーグ</h3>
@@ -194,7 +196,7 @@ export default function Home() {
             </div>
           </article>
           <article className="featured-card">
-            <img src="/images/web/DSC01028.webp" alt="日替りプレートの彩り豊かな野菜と主菜" loading="lazy" />
+            <img src={assetPath('/images/web/DSC01028.webp')} alt="日替りプレートの彩り豊かな野菜と主菜" loading="lazy" />
             <div>
               <span>Today&apos;s special</span>
               <h3>日替りプレート</h3>
@@ -227,9 +229,9 @@ export default function Home() {
 
       <section className="cafe-section">
         <div className="cafe-collage">
-          <figure className="cafe-photo-one"><img src="/images/web/DSC01204.webp" alt="抹茶、マロン、ゆずの3種のパフェ" loading="lazy" /></figure>
-          <figure className="cafe-photo-two"><img src="/images/web/DSC01126.webp" alt="豆乳チーズケーキ" loading="lazy" /></figure>
-          <figure className="cafe-photo-three"><img src="/images/web/DSC01283.webp" alt="木のトレーに載った紅茶" loading="lazy" /></figure>
+          <figure className="cafe-photo-one"><img src={assetPath('/images/web/DSC01204.webp')} alt="抹茶、マロン、ゆずの3種のパフェ" loading="lazy" /></figure>
+          <figure className="cafe-photo-two"><img src={assetPath('/images/web/DSC01126.webp')} alt="豆乳チーズケーキ" loading="lazy" /></figure>
+          <figure className="cafe-photo-three"><img src={assetPath('/images/web/DSC01283.webp')} alt="木のトレーに載った紅茶" loading="lazy" /></figure>
         </div>
         <div className="cafe-copy">
           <p className="section-kicker">CAFE TIME</p>
@@ -277,7 +279,7 @@ export default function Home() {
 
       <section className="space-section" id="space">
         <div className="space-image">
-          <img src="/images/web/DSC01373.webp" alt="グランドピアノのあるForest Gardenの店内" loading="lazy" />
+          <img src={assetPath('/images/web/DSC01373.webp')} alt="グランドピアノのあるForest Gardenの店内" loading="lazy" />
         </div>
         <div className="space-copy">
           <p className="section-kicker">A PLACE FOR EVERYONE</p>
@@ -306,10 +308,10 @@ export default function Home() {
           </a>
         </div>
         <div className="instagram-grid">
-          <img src="/images/web/DSC01003.webp" alt="Forest Gardenのお子様ランチ" loading="lazy" />
-          <img src="/images/web/DSC01117.webp" alt="星形のクッキーを添えたシフォンケーキ" loading="lazy" />
-          <img src="/images/web/DSC01267.webp" alt="レモンを浮かべた爽やかなドリンク" loading="lazy" />
-          <img src="/images/web/DSC01145.webp" alt="おすすめのデザート3種盛り" loading="lazy" />
+          <img src={assetPath('/images/web/DSC01003.webp')} alt="Forest Gardenのお子様ランチ" loading="lazy" />
+          <img src={assetPath('/images/web/DSC01117.webp')} alt="星形のクッキーを添えたシフォンケーキ" loading="lazy" />
+          <img src={assetPath('/images/web/DSC01267.webp')} alt="レモンを浮かべた爽やかなドリンク" loading="lazy" />
+          <img src={assetPath('/images/web/DSC01145.webp')} alt="おすすめのデザート3種盛り" loading="lazy" />
         </div>
       </section>
 
@@ -337,7 +339,7 @@ export default function Home() {
       </section>
 
       <section className="reservation-section">
-        <img src="/images/web/DSC01288.webp" alt="Forest Gardenで楽しむ温かな紅茶" loading="lazy" />
+        <img src={assetPath('/images/web/DSC01288.webp')} alt="Forest Gardenで楽しむ温かな紅茶" loading="lazy" />
         <div className="reservation-overlay" />
         <div className="reservation-copy">
           <p>RESERVATION</p>
