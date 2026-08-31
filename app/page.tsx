@@ -40,6 +40,19 @@ const menuGroups = [
       ['コーヒーゼリーフロート', '800'], ['ゆずスカッシュフロート', '800'], ['抹茶フロート', '800'],
     ],
   },
+  {
+    title: 'Medicinal Tea',
+    jp: '薬膳茶',
+    items: [
+      ['さらさら', '800', '血糖値が気になる方に / 桑葉・緑茶 / お食事と一緒にすっきり楽しめるお茶'],
+      ['うきうき', '800', 'ストレスや気分のリフレッシュに / レモングラス・青皮・菊花・柚子の皮 / 爽やかな香りで気分をリフレッシュ'],
+      ['ぽかぽか', '800', '冷えが気になる方に / 紅茶・桂皮・鶏血藤 / 体を内側から温めたいときに'],
+      ['ぱわー', '800', '元気をチャージしたい方に / 棗・青皮・枸杞・人参 / 毎日の元気をサポートする一杯'],
+      ['すやすや', '800', 'ゆっくり休みたい方に / カモミール・夜交藤 / 心を落ち着かせリラックスタイムに'],
+      ['すっきり', '800', 'むくみが気になる方に / 炒ハト麦・タクラン・赤小豆 / すっきり軽やかに過ごしたいときに'],
+      ['つやつや', '800', '美容と健康を意識する方に / マイマイ花・桑葉・黒豆・炒はと麦・枸杞 / 内側からキレイをサポート'],
+    ],
+  },
 ];
 
 const restaurantJsonLd = {
@@ -233,11 +246,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="all-menu-section" aria-labelledby="all-menu-title">
+      <section className="all-menu-section" id="all-menu" aria-labelledby="all-menu-title">
         <div className="all-menu-heading">
           <p className="section-kicker">ALL MENU</p>
-          <h2 id="all-menu-title">みんなの「食べたい」が<br />見つかる場所。</h2>
-          <p>お子様メニュー、カフェ、アルコールもご用意しています。</p>
+          <h2 id="all-menu-title"><span>Kids, Sweets</span><span>&amp; Drinks.</span></h2>
+          <p>キッズメニュー、デザート、ドリンク、パフェ、薬膳茶をご用意しています。</p>
         </div>
         <div className="menu-groups">
           {menuGroups.map((group, index) => (
@@ -248,8 +261,12 @@ export default function Home() {
                 <i aria-hidden="true" />
               </summary>
               <div className="menu-group-body">
-                {group.items.map(([name, price]) => (
-                  <p key={name}><span>{name}</span><strong>¥{price}</strong></p>
+                {group.title === 'Medicinal Tea' && <p className="menu-group-note">各800円・小さなおやつ付き</p>}
+                {group.items.map(([name, price, detail]) => (
+                  <div className="menu-row" key={name}>
+                    <p><span>{name}</span><strong>¥{price}</strong></p>
+                    {detail && <small>{detail}</small>}
+                  </div>
                 ))}
               </div>
             </details>
