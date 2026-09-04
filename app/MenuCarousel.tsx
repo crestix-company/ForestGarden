@@ -63,9 +63,15 @@ export default function MenuCarousel({ basePath = '' }: MenuCarouselProps) {
   const viewportRef = useRef<HTMLDivElement>(null);
 
   const goTo = (index: number) => {
-    const nextIndex = (index + slides.length) % slides.length;
+    const isMobile = window.matchMedia('(max-width: 720px)').matches;
+    const wrappedIndex = (index + slides.length) % slides.length;
+    const nextIndex = isMobile ? wrappedIndex : wrappedIndex < 3 ? 0 : 3;
     const viewport = viewportRef.current;
-    viewport?.scrollTo({ left: viewport.clientWidth * nextIndex, behavior: 'smooth' });
+    const card = viewport?.querySelector<HTMLElement>(`[data-slide-index="${nextIndex}"]`);
+    if (!viewport || !card) return;
+    const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+    const trackOffset = card.parentElement?.offsetLeft ?? 0;
+    viewport.scrollTo({ left: Math.min(card.offsetLeft - trackOffset, maxScroll), behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -85,16 +91,25 @@ export default function MenuCarousel({ basePath = '' }: MenuCarouselProps) {
   const handleScroll = () => {
     const viewport = viewportRef.current;
     if (!viewport || viewport.clientWidth === 0) return;
-    const nextIndex = Math.round(viewport.scrollLeft / viewport.clientWidth);
+    const isMobile = window.matchMedia('(max-width: 720px)').matches;
+    const nextIndex = isMobile
+      ? Math.round(viewport.scrollLeft / viewport.clientWidth)
+      : viewport.scrollLeft > (viewport.scrollWidth - viewport.clientWidth) / 2 ? 3 : 0;
     if (nextIndex !== activeIndex && nextIndex >= 0 && nextIndex < slides.length) setActiveIndex(nextIndex);
   };
+
+  const step = typeof window !== 'undefined' && window.matchMedia('(max-width: 720px)').matches ? 1 : 3;
 
   return (
     <div className="featured-menu-slider">
       <div className="featured-menu-viewport" ref={viewportRef} onScroll={handleScroll}>
         <div className="featured-menu-track">
-          {slides.map((slide) => (
-            <article className={`featured-card${slide.wide ? ' featured-card-wide' : ''}`} key={slide.title}>
+          {slides.map((slide, index) => (
+            <article
+              className={`featured-card${slide.wide ? ' featured-card-wide' : ''}`}
+              data-slide-index={index}
+              key={slide.title}
+            >
               <img src={`${basePath}/images/web/${slide.image}`} alt={slide.alt} loading="lazy" />
               <div>
                 <span>{slide.eyebrow}</span>
@@ -107,7 +122,7 @@ export default function MenuCarousel({ basePath = '' }: MenuCarouselProps) {
         </div>
       </div>
       <div className="featured-menu-controls" aria-label="おすすめランチのスライド操作">
-        <button type="button" onClick={() => goTo(activeIndex - 1)} aria-label="前のメニュー">←</button>
+        <button type="button" onClick={() => goTo(activeIndex - step)} aria-label="前のメニュー">←</button>
         <div>
           {slides.map((slide, index) => (
             <button
@@ -120,7 +135,7 @@ export default function MenuCarousel({ basePath = '' }: MenuCarouselProps) {
             />
           ))}
         </div>
-        <button type="button" onClick={() => goTo(activeIndex + 1)} aria-label="次のメニュー">→</button>
+        <button type="button" onClick={() => goTo(activeIndex + step)} aria-label="次のメニュー">→</button>
       </div>
       <p className="featured-menu-hint">左右にスワイプしてメニューをご覧いただけます</p>
     </div>
