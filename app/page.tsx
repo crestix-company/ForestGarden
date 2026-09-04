@@ -1,3 +1,6 @@
+import MenuCarousel from './MenuCarousel';
+import SpaceGallery from './SpaceGallery';
+
 const lunchMenu = [
   { name: 'Forest Gardenの日替りプレート', price: '1,700', note: 'その日のお楽しみプレート。旬の彩りを少しずつ。' },
   { name: '薬膳キーマカレー', price: '1,700', note: 'スパイスと薬膳素材をバランスよく合わせた中辛カレー。' },
@@ -5,6 +8,16 @@ const lunchMenu = [
   { name: '特製オニオンソースのハンバーグ', price: '1,700', note: '特製シャリアピンソースで、香りよく仕上げました。' },
   { name: '季節のお野菜のミートグラタン', price: '1,700', note: '旬のお野菜と、とろりと溶けたチーズを一緒に。' },
   { name: 'ゴロっとお肉のビーフシチュー', price: '2,200', note: '大きなお肉をじっくり煮込み、やわらかく。' },
+];
+
+const medicinalTeaMenu = [
+  ['さらさら', '800', '血糖値が気になる方に / 桑葉・緑茶 / お食事と一緒にすっきり楽しめるお茶'],
+  ['うきうき', '800', 'ストレスや気分のリフレッシュに / レモングラス・青皮・菊花・柚子の皮 / 爽やかな香りで気分をリフレッシュ'],
+  ['ぽかぽか', '800', '冷えが気になる方に / 紅茶・桂皮・鶏血藤 / 体を内側から温めたいときに'],
+  ['ぱわー', '800', '元気をチャージしたい方に / 棗・青皮・枸杞・人参 / 毎日の元気をサポートする一杯'],
+  ['すやすや', '800', 'ゆっくり休みたい方に / カモミール・夜交藤 / 心を落ち着かせリラックスタイムに'],
+  ['すっきり', '800', 'むくみが気になる方に / 炒ハト麦・タクラン・赤小豆 / すっきり軽やかに過ごしたいときに'],
+  ['つやつや', '800', '美容と健康を意識する方に / マイマイ花・桑葉・黒豆・炒はと麦・枸杞 / 内側からキレイをサポート'],
 ];
 
 const menuGroups = [
@@ -38,19 +51,6 @@ const menuGroups = [
     items: [
       ['もみじ抹茶パフェ', '1,100'], ['もみじマロンパフェ', '1,100'], ['箕面ゆずパフェ', '1,100'],
       ['コーヒーゼリーフロート', '800'], ['ゆずスカッシュフロート', '800'], ['抹茶フロート', '800'],
-    ],
-  },
-  {
-    title: 'Medicinal Tea',
-    jp: '薬膳茶',
-    items: [
-      ['さらさら', '800', '血糖値が気になる方に / 桑葉・緑茶 / お食事と一緒にすっきり楽しめるお茶'],
-      ['うきうき', '800', 'ストレスや気分のリフレッシュに / レモングラス・青皮・菊花・柚子の皮 / 爽やかな香りで気分をリフレッシュ'],
-      ['ぽかぽか', '800', '冷えが気になる方に / 紅茶・桂皮・鶏血藤 / 体を内側から温めたいときに'],
-      ['ぱわー', '800', '元気をチャージしたい方に / 棗・青皮・枸杞・人参 / 毎日の元気をサポートする一杯'],
-      ['すやすや', '800', 'ゆっくり休みたい方に / カモミール・夜交藤 / 心を落ち着かせリラックスタイムに'],
-      ['すっきり', '800', 'むくみが気になる方に / 炒ハト麦・タクラン・赤小豆 / すっきり軽やかに過ごしたいときに'],
-      ['つやつや', '800', '美容と健康を意識する方に / マイマイ花・桑葉・黒豆・炒はと麦・枸杞 / 内側からキレイをサポート'],
     ],
   },
 ];
@@ -177,33 +177,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="featured-menu-grid">
-          <article className="featured-card featured-card-wide">
-            <img src={assetPath('/images/web/DSC01067.webp')} alt="薬膳キーマカレーとサラダのプレート" loading="lazy" />
-            <div>
-              <span>Spice &amp; wellness</span>
-              <h3>薬膳キーマカレー</h3>
-              <p>香り高いスパイスと薬膳素材を、食べやすいバランスで。</p>
-              <strong>¥1,700</strong>
-            </div>
-          </article>
-          <article className="featured-card">
-            <img src={assetPath('/images/web/DSC01055.webp')} alt="トマトソース煮込みハンバーグのランチ" loading="lazy" />
-            <div>
-              <span>Slow cooked</span>
-              <h3>煮込みハンバーグ</h3>
-              <strong>¥1,700</strong>
-            </div>
-          </article>
-          <article className="featured-card">
-            <img src={assetPath('/images/web/DSC01028.webp')} alt="日替りプレートの彩り豊かな野菜と主菜" loading="lazy" />
-            <div>
-              <span>Today&apos;s special</span>
-              <h3>日替りプレート</h3>
-              <strong>¥1,700</strong>
-            </div>
-          </article>
-        </div>
+        <MenuCarousel basePath={process.env.NEXT_PUBLIC_BASE_PATH ?? ''} />
 
         <div className="lunch-list" aria-label="ランチメニュー一覧">
           {lunchMenu.map((item, index) => (
@@ -217,6 +191,24 @@ export default function Home() {
             </article>
           ))}
         </div>
+
+        <section className="medicinal-tea" aria-labelledby="medicinal-tea-title">
+          <header>
+            <div>
+              <p className="section-kicker">MEDICINAL TEA</p>
+              <h3 id="medicinal-tea-title">お食事に寄り添う、<br />七つの薬膳茶。</h3>
+            </div>
+            <p>気分や体調に合わせてお選びください。<br />各800円・小さなおやつ付き</p>
+          </header>
+          <div className="medicinal-tea-grid">
+            {medicinalTeaMenu.map(([name, price, detail]) => (
+              <article key={name}>
+                <div><h4>{name}</h4><strong>¥{price}</strong></div>
+                <p>{detail}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
         <div className="set-menu-note">
           <p>ランチとご一緒に</p>
@@ -252,7 +244,7 @@ export default function Home() {
         <div className="all-menu-heading">
           <p className="section-kicker">ALL MENU</p>
           <h2 id="all-menu-title"><span>Kids, Sweets</span><span>&amp; Drinks.</span></h2>
-          <p>キッズメニュー、デザート、ドリンク、パフェ、薬膳茶をご用意しています。</p>
+          <p>キッズメニュー、デザート、ドリンク、パフェをご用意しています。</p>
         </div>
         <div className="menu-groups">
           {menuGroups.map((group, index) => (
@@ -263,7 +255,6 @@ export default function Home() {
                 <i aria-hidden="true" />
               </summary>
               <div className="menu-group-body">
-                {group.title === 'Medicinal Tea' && <p className="menu-group-note">各800円・小さなおやつ付き</p>}
                 {group.items.map(([name, price, detail]) => (
                   <div className="menu-row" key={name}>
                     <p><span>{name}</span><strong>¥{price}</strong></p>
@@ -293,6 +284,7 @@ export default function Home() {
             <span><b>02</b> ペット同伴テラス</span>
             <span><b>03</b> 駐車場3台</span>
           </div>
+          <SpaceGallery basePath={process.env.NEXT_PUBLIC_BASE_PATH ?? ''} />
           <a className="text-link" href="https://icco82milkyway.wixsite.com/forestgarden/rental-room" target="_blank" rel="noreferrer">
             レンタル・貸切のご案内 <span>↗</span>
           </a>
