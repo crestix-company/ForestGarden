@@ -110,6 +110,7 @@ a:focus-visible, summary:focus-visible { outline: 2px solid #b9d0bd; outline-off
 .featured-card h3 { margin: 12px 0 8px; font-family: var(--font-jp-serif), serif; font-size: clamp(20px, 2vw, 31px); font-weight: 400; letter-spacing: .05em; }
 .featured-card p { max-width: 430px; margin: 0 0 18px; font-size: 13px; line-height: 1.9; color: #d8dfd7; }
 .featured-card strong { font-family: var(--font-serif), serif; font-size: 18px; letter-spacing: .08em; font-weight: 500; }
+.featured-menu-track article:nth-child(n+4) { display: none; }
 .featured-menu-controls { display: none; }
 .featured-menu-hint { display: none; }
 .lunch-list { max-width: 1120px; margin: 0 auto 70px; border-top: 1px solid rgba(255,255,255,.24); }
@@ -325,8 +326,8 @@ footer { padding: 90px clamp(24px, 6vw, 95px) 35px; background: #1f3027; color: 
   .featured-card > div { padding: 25px; }
   .featured-menu-controls { display: grid; grid-template-columns: 46px 1fr 46px; align-items: center; gap: 16px; margin-top: 16px; }
   .featured-menu-controls > button { width: 46px; height: 42px; border: 1px solid rgba(255,255,255,.38); background: transparent; color: white; font-size: 17px; cursor: pointer; }
-  .featured-menu-controls > div { display: flex; justify-content: center; gap: 10px; }
-  .featured-menu-controls > div button { width: 28px; height: 14px; position: relative; padding: 0; border: 0; background: transparent; cursor: pointer; }
+  .featured-menu-controls > div { display: flex; justify-content: center; gap: 6px; }
+  .featured-menu-controls > div button { width: 20px; height: 14px; position: relative; padding: 0; border: 0; background: transparent; cursor: pointer; }
   .featured-menu-controls > div button::after { content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 1px; background: rgba(255,255,255,.34); transition: background .25s, transform .25s; }
   .featured-menu-controls > div button.is-active::after { background: white; transform: scaleY(2); }
   .featured-menu-hint { display: flex; justify-content: center; align-items: center; gap: 10px; margin: 12px 0 0; color: #b9c8b9; font-size: 10px; letter-spacing: .06em; }
